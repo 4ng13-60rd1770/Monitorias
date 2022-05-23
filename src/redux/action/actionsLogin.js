@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth"
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db, facebook, google } from "../../firebase/firebaseConfig";
+import {  db, facebook, google } from "../../firebase/firebaseConfig";
 import { types } from "../types/types"
 
 export const loginEmailPassword = (email,password)=>{
@@ -65,35 +65,26 @@ export const LoginSync = (id, displayname)=>{
     }
 }
 
-export const registerAsync = (email,pass,nombre)=>{
-    return async (dispatch)=>{
-        const auth = getAuth();
-        try{
-            const newUsr = await createUserWithEmailAndPassword(auth, email,pass)
-            const results = await setDoc(doc(collection(db,"usuarios"),newUsr.user.uid),{
-                nombre,
-                email
-            })
-            alert('Usuario registrado exitosamente')
-            dispatch(register(newUsr.user.uid, nombre, email))
-        }
-        catch(error){
-            alert('El email ya esta en uso')
-        }
-        
+export  const  registerEmail = ({ name, email, password })=>{
+    return async  ( dispatch) => {
+        const auth = getAuth( );
 
-    }
+        try {
+           const newUser = await createUserWithEmailAndPassword(auth,email,password)
+           const results = await setDoc(doc(collection(db,"usuarios"),newUser.user.uid), {
+               name,
+               email
+           })
+           alert ("usuario registrado")
+           dispatch(register(newUser.user.uid,name,email))
+        } catch (error) {
+            alert('usuario en uso ')
+        }
+    };
 }
-
-
-
-
-
-const register = (email,pass,name)=>{
-    return{
-        type:types.register,
-        payload:{
-            email,pass,name
-        }
-    }
+const register = (id,name,email ) => {
+   return {
+       type: types.register,
+       payload: { id, name, email}
+      }
 }

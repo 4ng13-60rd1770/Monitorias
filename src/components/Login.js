@@ -20,6 +20,7 @@ const Login = () => {
     const handleLogin = (e) =>{
         e.preventDefault();
         dispatch(loginEmailPassword(email, password));
+        
     }
     const handleGoogle = ()=>{
     dispatch(LoginGoogle());

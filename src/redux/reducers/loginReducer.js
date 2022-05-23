@@ -10,13 +10,18 @@ export const loginReducer = ( state = {}, action)=> {
             id:action.payload.id,
             name: action.payload.displayname
         }
-            case types.register:
+        case types.register:
+           
                 return{
-                    email: action.payload.email, 
-                    pass: action.payload.pass,
-                    nombre: action.payload.name,
-                }
+                    email: action.payload.email,
+                    password: action.payload.password,
+                    name: action.payload.name
+                 }
+
+
         default:
             return state;
     }
 }
+
+

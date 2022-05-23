@@ -1,65 +1,89 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Campos, Formulario, FormWrapper, Inicio, Titulo } from '../styles/registerStyles'
-import {useFormik} from 'formik'
-import * as Yup from 'yup'
-import { registerAsync } from '../redux/action/actionsLogin'
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  CamposRegister,
+  FormularioRegister,
+  FormWrapperRegister,
+  Registro,
+  TituloRegister,
+} from "../styles/registerStyles";
+import { registerEmail } from "../redux/action/actionsLogin";
+
+
 const Register = () => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-
-    const formik = useFormik({
-        initialValue:{
-            nombre:"",
+  const formik = useFormik({
+        initialValues:{
+            name:"",
             email:"",
             password:"",
             passwordrepeat:""
-
         },
-        onSubmit:(data)=>{
-            dispatch(registerAsync(data))
-        },
-            validationSchema: Yup.object({
-                nombre: Yup.string()
-                .min(2, 'El nombre es muy corto')
-                .max(50,'El nombre es muy largo')
-                .required('Este campo es requerido'),
 
-                email:Yup.string().email('El email debe de ser tipo abcdf@gmail.com').required('Este campo es requerido'),
-                password:Yup.string()
-                .min(6,'Clave muy corta')
-                .max(10, 'Clave muy larga')
-                .required('Este campo es requerido').oneOf([Yup.ref('passwordrepeat')], 'Las Contraseñas no coinciden'),
-                passwordrepeat:Yup.string()
-                .min(6, 'Clave muy corta')
-                .max(10, 'Contraseña muy larga')
-                .required('Este campo es requerido').oneOf([Yup.ref('password')], 'Las Contraseñas no coinciden')
-            })
+        onSubmit: (data)=>{
+            dispatch(registerEmail(data))
+        },
+        validationSchema : Yup.object({
+            name: Yup.string().required(),
+            email: Yup.string().email().required(),
+            password: Yup.string().required().oneOf([Yup.ref('passwordrepeat')], 'Las contraseñas no coinciden'),
+            passwordrepeat:Yup.string().required().oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
+        })
     });
 
   return (
     <>
-        <FormWrapper>
-           
-                <Formulario onSubmit={formik.handleSubmit}>
-                <Titulo>
-                <img className="logo" src = "https://res.cloudinary.com/dgzfc4clj/image/upload/v1653247137/Logo_iha7gc.png" style={{width:'100px', display:'flex',align:'center'}} alt='logo'/>
-                <h2>Registrate a Monitorias</h2>
-                </Titulo>
-                <Campos type="text" name= "nombre" placeholder="Nombre & Apellido" autoComplete='"off' onChange={formik.handleChange}></Campos>
-                <Campos type="email" name= "email" placeholder="Correo Electronico" autoComplete='"off' onChange={formik.handleChange}></Campos>
-                
-                <Campos type="password" name= "password" placeholder="Contraseña" autoComplete="off" onChange={formik.handleChange}></Campos>
-                <Campos type="password" name= "passwordrepeat" placeholder="Contraseña" autoComplete='"off' onChange={formik.handleChange}></Campos>
-                <Inicio type = 'submit'>Registro</Inicio>
-                <Link to="/login"><h5>Regresar</h5></Link>
-            </Formulario>
-            
-           
-        </FormWrapper>
+      <FormWrapperRegister>
+        <FormularioRegister onSubmit={formik.handleSubmit}>
+          <TituloRegister>
+            <img
+              className="logo"
+              src="https://res.cloudinary.com/dgzfc4clj/image/upload/v1653247137/Logo_iha7gc.png"
+              style={{ width: "100px", display: "flex", align: "center" }}
+              alt="logo"
+            />
+            <h2>Registrate a Monitorias</h2>
+          </TituloRegister>
+          <CamposRegister
+            type="name"
+            name="name"
+            placeholder="Nombre & Apellido"
+            autoComplete='"off'
+            onChange={formik.handleChange}
+          />
+          <CamposRegister
+            type="email"
+            name="email"
+            placeholder="Correo Electronico"
+            autoComplete='"off'
+            onChange={formik.handleChange}
+          />
+          <CamposRegister
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            autoComplete="off"
+            onChange={formik.handleChange}
+          />
+          <CamposRegister
+            type="password"
+            name="passwordrepeat"
+            placeholder="Contraseña"
+            autoComplete='"off'
+            onChange={formik.handleChange}
+          />
+          <Registro type="submit">Registro</Registro>
+          <Link to="/login">
+            <h5>Regresar</h5>
+          </Link>
+        </FormularioRegister>
+      </FormWrapperRegister>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

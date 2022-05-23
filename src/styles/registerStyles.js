@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormWrapper = styled.div`
+export const FormWrapperRegister = styled.div`
 display: flex;
 background: #ffff;
 justify-content: center;
@@ -9,7 +9,7 @@ height: 100vh;
 padding: 0 20px;
 `;
 
-export const Formulario = styled.form`
+export const FormularioRegister = styled.form`
     width:100%
     max-width:700px;
     padding:40px;
@@ -18,7 +18,7 @@ export const Formulario = styled.form`
     box-sizing: border-box;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
 `;
-export const Titulo = styled.div`
+export const TituloRegister = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@ export const Titulo = styled.div`
   display:flex;
 `;
 
-export const Campos = styled.input`
+export const CamposRegister = styled.input`
  width: 100%;
  height:2.4em;
  border:0 solid #ffff;
@@ -38,7 +38,7 @@ export const Campos = styled.input`
  box-sizing: border-box;
  box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
 `;
-export const Inicio = styled.button`
+export const Registro = styled.button`
 display: block;
 background-color:rgb(148 180 59);
 color: #FFFF;
