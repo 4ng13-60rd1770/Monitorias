@@ -3,3 +3,12 @@ export const types = {
     logout:'logout',
     register:'register'
 }
+
+export const monitores = {
+    register:'add',
+    get: 'getMonitores',
+}
+
+export const monitorias={
+    add: 'add'
+}

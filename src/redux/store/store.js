@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk'
 import { loginReducer } from "../reducers/loginReducer";
+import { monitoresReducers } from '../reducers/monitoresReducers';
 
 
 
@@ -10,7 +11,8 @@ const composeEnhancers =
   compose;
 
   const reducers = combineReducers ({
-      login: loginReducer
+      login: loginReducer,
+      monitor:monitoresReducers
   })
 
   export const store = createStore(
