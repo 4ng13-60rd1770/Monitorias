@@ -32,7 +32,9 @@ export const monitoresReducers = (state = initialState, action) => {
     case monitores.get:
       return { ...state, monitores: action.payload };
       case monitores.delete:
-        return {monitores:state.monitores.filter(m=>m.email !== action.payload)}
+        return { ...state, monitores:(state.monitores.filter(m=>m.cedula !== action.payload))};
+        case monitores.edit:
+          return { ...state, monitores:[...state.monitores,action.payload]}
     default:
       return state;
   }

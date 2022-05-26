@@ -7,7 +7,7 @@ export const types = {
 export const monitores = {
     register:'add',
     get: 'getMonitores',
-    delete:'delete'
-
+    delete:'delete',
+    edit:'edit'
 }
 

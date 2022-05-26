@@ -5,6 +5,7 @@ import Principal from '../pages/Principal'
 import Sidebar from '../components/Sidebar'
 import Monitorias from '../pages/Monitorias'
 import Monitores from '../pages/Monitores'
+import User from '../pages/User'
 
 
 
@@ -17,11 +18,9 @@ const DashboarRouters = () => {
     </div>
         <Routes>
             <Route path='/' element={<Principal/>}/>
-            <Route index element={<Principal/>}/>
             <Route path='/monitorias' element={<Monitorias/>}/>
             <Route path='/monitores' element={<Monitores/>}/>
-            <Route path='/user' element={<Principal/>}/>
-            <Route path='/order' element={<Principal/>}/>
+            <Route path='/user' element={<User/>}/>
         </Routes>
 
     </div>

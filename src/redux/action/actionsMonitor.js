@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { db } from "../../firebase/firebaseConfig"
 import { monitores } from "../types/types"
 
@@ -53,15 +53,50 @@ export const deleteMonitor =(cedula)=>{
         console.log(datosQ)
         datosQ.forEach(docu => {
             deleteDoc(doc(db, 'monitores', docu.id))
-
         })
+        dispatch(deleteMonitores(cedula))
     }
 }
 
 
-export const deleteMonitoresAsync = (cedula)=>{
+export const deleteMonitores = (cedula)=>{
     return{
         type: monitores.delete,
         payload:cedula
+    }
+}
+
+
+
+export const editMonitores = (cedula,monitor)=>{
+    return async(dispatch) =>{
+        const collectionListar = collection(db, "monitores")
+        const q = query(collectionListar, where('cedula', '==', cedula))
+        const dataA = await getDocs(q)
+        let id
+
+        dataA.forEach(async(docu)=>{
+            id = docu.id
+        })
+        console.log(id)
+
+        const docRef= doc(db, 'monitores', id)
+
+        await updateDoc(docRef,monitor)
+
+        .then(()=>{
+            dispatch(editMonitor(monitor))
+        })
+        .catch(error=>alert(error))
+        dispatch(getMonitoresAsync)
+    }
+}
+
+
+
+export const editMonitor = (monitor)=>{
+    return{
+        type: monitores.edit,
+        payload:monitor
     }
 }

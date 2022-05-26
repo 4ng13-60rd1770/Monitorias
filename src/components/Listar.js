@@ -1,60 +1,68 @@
-import React, { useEffect } from 'react'
-import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteMonitor, getMonitores } from '../redux/action/actionsMonitor';
-import { CardCedula, CardCelular, CardCorreo, CardNombre, CardPrograma, CardSemestre, ConstainerCard, Editar, Eliminar } from '../styles/CardStyles'
-
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteMonitor, getMonitores } from "../redux/action/actionsMonitor";
+import {
+  CardCedula,
+  CardCelular,
+  CardCorreo,
+  CardNombre,
+  CardPrograma,
+  CardSemestre,
+  ConstainerCard,
+  Editar,
+  Eliminar,
+} from "../styles/CardStyles";
+import Edit from "./Editar";
 
 const Listar = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const {monitores} = useSelector(store => store.monitor);
-    console.log(monitores)
+    const [modal, setModal] = useState(false);
 
-    useEffect(()=>{
-        dispatch(getMonitores());
-    },[dispatch])
+    const [datos, setDatos] = useState([]);
+
+
+  const { monitores } = useSelector((store) => store.monitor);
+
+  useEffect(() => {
+    dispatch(getMonitores());
+  }, [dispatch, monitores]);
+
+  const editar = (monitor) => {
+    setDatos(monitor);
+    setModal(true);
+  };
+
   return (
+    <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+      {monitores.map((m, index) => (
+        <section key={index}>
+          <ConstainerCard>
+            <CardPrograma>{m.programa}</CardPrograma>
 
-    <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-    {
-        monitores.map((m, index)=>(
-            <section key={index}>
-            <ConstainerCard>
+            <CardNombre>{m.name}</CardNombre>
 
-            <CardPrograma>
-               {m.programa}
-            </CardPrograma>
+            <CardSemestre>Semestre:{m.semestre}</CardSemestre>
 
-            <CardNombre>
-               {m.name}
-            </CardNombre>
+            <CardCedula>Cedula:{m.cedula}</CardCedula>
 
-            <CardSemestre>
-                Semestre:{m.semestre}
-            </CardSemestre>
+            <CardCelular>Celular:{m.celular}</CardCelular>
 
-            <CardCedula>
-                Cedula:{m.cedula}
-            </CardCedula>
+            <CardCorreo>{m.email}</CardCorreo>
+            <Eliminar onClick={() => dispatch(deleteMonitor(m.cedula))}>
+              <FaTrashAlt />
+            </Eliminar>
 
-            <CardCelular>
-                Celular:{m.celular}
-            </CardCelular>
-
-            <CardCorreo>
-                {m.email}
-            </CardCorreo>
-            <Eliminar onClick={()=>dispatch(deleteMonitor(m.cedula))}><FaTrashAlt/></Eliminar>
-            <Editar><FaPencilAlt/></Editar>
-        </ConstainerCard>
-
-            </section>
-        ))
-    }
-
+            <Editar onClick={() => editar(m)}>
+              <FaEdit />
+            </Editar>
+          </ConstainerCard>
+        </section>
+      ))}
+       { modal ? (<Edit data={datos} setModal={modal} />) : "" }
     </div>
-  )
-}
+  );
+};
 
-export default Listar
+export default Listar;
