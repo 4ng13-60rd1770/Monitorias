@@ -29,6 +29,18 @@ export const CamposMonitorias = styled.input`
   box-sizing: border-box;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
 `;
+export const CamposMonitoriasSelect = styled.select`
+  width: 40%;
+  height: 2.5em;
+  border: 0 solid #ffff;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #fff;
+  margin: 10px;
+  padding-left: .5rem;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
+`;
 export const Agregar = styled.button`
   display: block;
   background-color: rgb(148 180 59);

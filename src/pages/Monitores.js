@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Listar from "../components/Listar";
 import { addMonitor } from "../redux/action/actionsMonitor";
 import {
     Agregar,
@@ -10,6 +11,7 @@ import {
   FormWrapperMonitores,
 } from "../styles/monitoresStyles";
 
+
 const Monitores = () => {
 
   const { carreras } = useSelector( state => state.monitor)
@@ -17,6 +19,9 @@ const Monitores = () => {
   const semestres = [1,2,3,4,5,6,7,8,9,10];
 
   const dispatch = useDispatch();
+
+
+  
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +48,7 @@ const Monitores = () => {
             type="name"
             name="name"
             placeholder="Nombre & Apellido"
-            autoComplete='"off'
+            autoComplete="off"
             onChange={formik.handleChange}
           />
           <CamposMonitoresSelect
@@ -88,7 +93,7 @@ const Monitores = () => {
             type="number"
             name="celular"
             placeholder="Celular"
-            autoComplete='o0ff'
+            autoComplete='off'
             onChange={formik.handleChange}
           />
           <CamposMonitores
@@ -101,6 +106,7 @@ const Monitores = () => {
           <Agregar type="submit">Agregar</Agregar>
         </FormularioMonitores>
       </FormWrapperMonitores>
+        <Listar/>
     </div>
   );
 };
