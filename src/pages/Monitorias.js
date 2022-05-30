@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Buscador from "../components/Buscador";
+import ListarMonitorias from "../components/ListarMonitorias";
 import { addMonitorias } from "../redux/action/actionsMonitorias";
 import {
   Agregar,
@@ -57,7 +58,7 @@ const Monitorias = () => {
           <CamposMonitoriasSelect
             type="text"
             name="monitor"
-            placeholder="Semestre"
+            placeholder="Monitor"
             autoComplete='off'
             onChange={formik.handleChange}
             defaultValue='default'
@@ -94,6 +95,7 @@ const Monitorias = () => {
           <Agregar type="submit">Agregar Monitorias</Agregar>
         </FormularioMonitorias>
       </FormWrapperMonitorias>
+      <ListarMonitorias/>
     </div>
   );
 };

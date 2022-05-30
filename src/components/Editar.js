@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import useForm from "../hooks/useForm";
+import { useDispatch} from "react-redux";
 import { editMonitores } from "../redux/action/actionsMonitor";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -11,7 +10,7 @@ import {
   FormularioMonitores,
 } from "../styles/monitoresStyles";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+
 
 const Edit = ({ data, setModal }) => {
 
@@ -35,16 +34,10 @@ const Edit = ({ data, setModal }) => {
     }
   })
 
-//   const handleSubmit =(e)=>{
-//     e.preventDefault();
-//     console.log(formValue)
-//     dispatch(editMonitores(cedula, formValue))
-//     handleClose()
-// }
 
 useEffect(()=> {
   setShow( setModal )
-  // setDatos( data )
+
   console.log( data )
 }, [setModal, data])
 

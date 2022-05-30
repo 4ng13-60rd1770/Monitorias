@@ -16,8 +16,6 @@ export const addMonitor = (monitor)=>{
 
 }
 
-
-
 export const registerMonitor = (monitor)=>{
     return{
         type: monitores.register,

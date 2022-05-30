@@ -8,8 +8,9 @@ const initialState = {
 export const monitoriasReducer = (state = initialState,action) => {
   switch (action.type) {
     case monitorias.add:
-     
       return {...state, monitorias: [...state.monitorias,action.payload] };
+      case monitorias.list:
+        return { ...state, monitorias: action.payload };
 
     default:
       return state;

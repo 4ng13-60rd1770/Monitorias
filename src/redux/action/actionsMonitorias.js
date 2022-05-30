@@ -1,7 +1,25 @@
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, getDocs } from "firebase/firestore"
 import { db } from "../../firebase/firebaseConfig"
 import { monitorias } from "../types/typesMonitorias"
 
+
+export const getMonitorias = () => {
+    return async(dispatch) =>{
+        const querySnapshot = await getDocs(collection(db, "monitorias"));
+        let dataM = []
+        querySnapshot.forEach((doc) => {
+            dataM.push(doc.data())
+        })
+        dispatch(getMonitoresAsync(dataM));
+    }
+}
+
+const getMonitoresAsync = (data) => {
+    return {
+        type: monitorias.get,
+        payload: data
+    }
+}
 
 
 export const addMonitorias =(monitoria)=>{
@@ -17,9 +35,10 @@ export const addMonitorias =(monitoria)=>{
     }
 }
 
-export const registerMonitorias=()=>{
+export const registerMonitorias=(monitoria)=>{
     return{
-        type:monitorias.add,
-        payload:monitorias
+        type:monitorias.register,
+        payload:monitoria
     }
 }
+

@@ -1,3 +1,6 @@
 export const monitorias={
-    add:'add'
+    register:'add',
+    get:'getMonitorias',
+    delete:'delete',
+    edit:'edit'
 }
