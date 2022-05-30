@@ -1,6 +1,7 @@
 # Monitorias App
 
 En un solo lugar puedes ver y tener el control de la gestion universitaria.
+![image](https://user-images.githubusercontent.com/65315447/171061036-fb4dcee8-c235-4352-a0e8-f39baaebddd9.png)
 
 ![image](https://user-images.githubusercontent.com/65315447/171060696-cae1d06b-44a8-421d-8ff7-8ed96c1d2395.png)
 
